@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UniDoc Encrypt — Secure File Encryption (AES-256-GCM)</title>
+  <meta name="description" content="Encrypt and decrypt files securely in your browser using military-grade AES-256-GCM encryption. Compatible with the UniDoc App.">
+  <meta name="theme-color" content="#7C4DFF">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Animated background -->
+  <div class="bg-animation">
+    <div class="bg-gradient"></div>
+    <div class="bg-particles" id="particles"></div>
+  </div>
+
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="#" class="nav-logo">
+        <span class="material-icons-round logo-icon">shield</span>
+        <span class="logo-text">UniDoc<span class="logo-accent">Encrypt</span></span>
+      </a>
+      <div class="nav-links">
+        <a href="#encrypt" class="nav-link active">Encrypt</a>
+        <a href="#decrypt" class="nav-link">Decrypt</a>
+        <a href="#features" class="nav-link">Features</a>
+        <a href="#app" class="nav-link">Get App</a>
+      </div>
+      <a href="#app" class="nav-cta">
+        <span class="material-icons-round">download</span>
+        Download App
+      </a>
+      <button class="nav-toggle" id="navToggle">
+        <span class="material-icons-round">menu</span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#encrypt" class="mobile-link">Encrypt</a>
+    <a href="#decrypt" class="mobile-link">Decrypt</a>
+    <a href="#features" class="mobile-link">Features</a>
+    <a href="#app" class="mobile-link">Get App</a>
+  </div>
+
+  <!-- Hero Section -->
+  <section class="hero" id="hero">
+    <div class="container">
+      <div class="hero-badge">
+        <span class="material-icons-round">verified_user</span>
+        Military-Grade Encryption
+      </div>
+      <h1 class="hero-title">
+        Encrypt Your Files<br>
+        <span class="gradient-text">In Your Browser</span>
+      </h1>
+      <p class="hero-subtitle">
+        Protect any file with AES-256-GCM encryption directly in your browser.
+        No uploads. No servers. Your data never leaves your device.
+      </p>
+      <div class="hero-actions">
+        <a href="#encrypt" class="btn btn-primary btn-lg">
+          <span class="material-icons-round">enhanced_encryption</span>
+          Encrypt a File
+        </a>
+        <a href="#decrypt" class="btn btn-outline btn-lg">
+          <span class="material-icons-round">lock_open</span>
+          Decrypt a File
+        </a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat">
+          <span class="stat-value">AES-256</span>
+          <span class="stat-label">Encryption</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat">
+          <span class="stat-value">GCM</span>
+          <span class="stat-label">Auth Mode</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat">
+          <span class="stat-value">150K+</span>
+          <span class="stat-label">PBKDF2 Rounds</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat">
+          <span class="stat-value">0</span>
+          <span class="stat-label">Data Sent</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Encrypt Section -->
+  <section class="tool-section" id="encrypt">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-icon encrypt-icon">
+          <span class="material-icons-round">enhanced_encryption</span>
+        </div>
+        <h2 class="section-title">Encrypt File</h2>
+        <p class="section-subtitle">Select a file, set a strong password, and encrypt it securely with AES-256-GCM</p>
+      </div>
+
+      <div class="tool-card">
+        <!-- File Drop Zone -->
+        <div class="drop-zone" id="encryptDropZone">
+          <div class="drop-zone-content">
+            <span class="material-icons-round drop-icon">cloud_upload</span>
+            <h3>Drop your file here</h3>
+            <p>or click to browse</p>
+            <span class="drop-hint">Any file type • Max 100MB • Processed locally</span>
+          </div>
+          <input type="file" id="encryptFileInput" class="file-input" />
+        </div>
+
+        <!-- Selected File Info -->
+        <div class="file-info" id="encryptFileInfo" style="display:none;">
+          <div class="file-icon-wrap">
+            <span class="material-icons-round" id="encryptFileIcon">description</span>
+          </div>
+          <div class="file-details">
+            <span class="file-name" id="encryptFileName"></span>
+            <span class="file-size" id="encryptFileSize"></span>
+          </div>
+          <button class="file-remove" id="encryptFileRemove" title="Remove file">
+            <span class="material-icons-round">close</span>
+          </button>
+        </div>
+
+        <!-- Password Section -->
+        <div class="password-section" id="encryptPasswordSection" style="display:none;">
+          <div class="password-options">
+            <label class="toggle-label">
+              <input type="checkbox" id="autoPasswordToggle" checked>
+              <span class="toggle-slider"></span>
+              <span>Auto-generate strong password</span>
+            </label>
+          </div>
+
+          <div class="password-field">
+            <label for="encryptPassword">
+              <span class="material-icons-round">key</span>
+              Encryption Password
+            </label>
+            <div class="input-group">
+              <input type="password" id="encryptPassword" placeholder="Min 12 characters" minlength="12" autocomplete="new-password">
+              <button class="input-btn" id="toggleEncryptPassword" title="Show/hide password">
+                <span class="material-icons-round">visibility_off</span>
+              </button>
+              <button class="input-btn" id="copyPassword" title="Copy password" style="display:none;">
+                <span class="material-icons-round">content_copy</span>
+              </button>
+            </div>
+            <div class="password-strength" id="passwordStrength">
+              <div class="strength-bar">
+                <div class="strength-fill" id="strengthFill"></div>
+              </div>
+              <span class="strength-text" id="strengthText"></span>
+            </div>
+          </div>
+
+          <!-- Key Expiry -->
+          <div class="expiry-section">
+            <label>
+              <span class="material-icons-round">schedule</span>
+              Key Expiry (optional)
+            </label>
+            <select id="keyExpiry">
+              <option value="0">No expiry</option>
+              <option value="1">1 hour</option>
+              <option value="6">6 hours</option>
+              <option value="24" selected>24 hours</option>
+              <option value="72">3 days</option>
+              <option value="168">7 days</option>
+              <option value="720">30 days</option>
+            </select>
+          </div>
+
+          <button class="btn btn-primary btn-block" id="encryptBtn" disabled>
+            <span class="material-icons-round">lock</span>
+            <span>Encrypt File</span>
+          </button>
+        </div>
+
+        <!-- Progress -->
+        <div class="progress-section" id="encryptProgress" style="display:none;">
+          <div class="progress-info">
+            <span class="progress-status" id="encryptStatus">Encrypting...</span>
+            <span class="progress-percent" id="encryptPercent">0%</span>
+          </div>
+          <div class="progress-bar">
+            <div class="progress-fill" id="encryptProgressFill"></div>
+          </div>
+        </div>
+
+        <!-- Success -->
+        <div class="success-section" id="encryptSuccess" style="display:none;">
+          <div class="success-icon-wrap">
+            <span class="material-icons-round">check_circle</span>
+          </div>
+          <h3>Encryption Complete!</h3>
+          <p>Your file has been securely encrypted with AES-256-GCM</p>
+
+          <!-- Password display -->
+          <div class="key-share-info" id="passwordDisplay" style="display:none;">
+            <div class="key-share-header">
+              <span class="material-icons-round">key</span>
+              Your Encryption Password (save this!)
+            </div>
+            <code class="key-share-data" id="passwordDisplayText"></code>
+            <p class="key-share-hint">You need this password to decrypt the file. Save it somewhere safe — it cannot be recovered.</p>
+          </div>
+
+          <div class="success-actions">
+            <button class="btn btn-primary" id="downloadEncrypted">
+              <span class="material-icons-round">download</span>
+              Download .ufenc File
+            </button>
+            <button class="btn btn-outline" id="copyPassword2">
+              <span class="material-icons-round">content_copy</span>
+              Copy Password
+            </button>
+          </div>
+          <div class="success-actions" style="margin-top:8px;">
+            <button class="btn btn-ghost" id="changePasswordBtn">
+              <span class="material-icons-round">edit</span>
+              Change Password & Re-encrypt
+            </button>
+            <button class="btn btn-ghost" id="encryptAnother">
+              <span class="material-icons-round">add</span>
+              Encrypt Another File
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Decrypt Section -->
+  <section class="tool-section" id="decrypt">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-icon decrypt-icon">
+          <span class="material-icons-round">lock_open</span>
+        </div>
+        <h2 class="section-title">Decrypt File</h2>
+        <p class="section-subtitle">Open .ufenc files encrypted by UniDoc — either from the app or this website</p>
+      </div>
+
+      <div class="tool-card">
+        <!-- File Drop Zone -->
+        <div class="drop-zone" id="decryptDropZone">
+          <div class="drop-zone-content">
+            <span class="material-icons-round drop-icon">enhanced_encryption</span>
+            <h3>Drop your .ufenc file here</h3>
+            <p>or click to browse</p>
+            <span class="drop-hint">Only .ufenc files • Processed locally</span>
+          </div>
+          <input type="file" id="decryptFileInput" class="file-input" accept=".ufenc" />
+        </div>
+
+        <!-- Selected File Info -->
+        <div class="file-info" id="decryptFileInfo" style="display:none;">
+          <div class="file-icon-wrap decrypt">
+            <span class="material-icons-round">enhanced_encryption</span>
+          </div>
+          <div class="file-details">
+            <span class="file-name" id="decryptFileName"></span>
+            <span class="file-size" id="decryptFileSize"></span>
+          </div>
+          <button class="file-remove" id="decryptFileRemove" title="Remove file">
+            <span class="material-icons-round">close</span>
+          </button>
+        </div>
+
+        <!-- Encrypted File Info -->
+        <div class="encrypted-info" id="encryptedFileInfo" style="display:none;">
+          <div class="info-grid">
+            <div class="info-item">
+              <span class="info-label">Original File</span>
+              <span class="info-value" id="origFileName">—</span>
+            </div>
+            <div class="info-item">
+              <span class="info-label">Original Size</span>
+              <span class="info-value" id="origFileSize">—</span>
+            </div>
+            <div class="info-item">
+              <span class="info-label">Encrypted On</span>
+              <span class="info-value" id="encryptedOn">—</span>
+            </div>
+            <div class="info-item">
+              <span class="info-label">Algorithm</span>
+              <span class="info-value" id="encAlgorithm">—</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Password Section -->
+        <div class="password-section" id="decryptPasswordSection" style="display:none;">
+          <div class="password-field">
+            <label for="decryptPassword">
+              <span class="material-icons-round">key</span>
+              Decryption Password
+            </label>
+            <div class="input-group">
+              <input type="password" id="decryptPassword" placeholder="Enter the encryption password" autocomplete="current-password">
+              <button class="input-btn" id="toggleDecryptPassword" title="Show/hide password">
+                <span class="material-icons-round">visibility_off</span>
+              </button>
+            </div>
+          </div>
+
+          <button class="btn btn-cyan btn-block" id="decryptBtn" disabled>
+            <span class="material-icons-round">lock_open</span>
+            <span>Decrypt File</span>
+          </button>
+        </div>
+
+        <!-- Progress -->
+        <div class="progress-section" id="decryptProgress" style="display:none;">
+          <div class="progress-info">
+            <span class="progress-status" id="decryptStatus">Decrypting...</span>
+            <span class="progress-percent" id="decryptPercent">0%</span>
+          </div>
+          <div class="progress-bar decrypt">
+            <div class="progress-fill" id="decryptProgressFill"></div>
+          </div>
+        </div>
+
+        <!-- Success -->
+        <div class="success-section" id="decryptSuccess" style="display:none;">
+          <div class="success-icon-wrap decrypt">
+            <span class="material-icons-round">check_circle</span>
+          </div>
+          <h3>Decryption Complete!</h3>
+          <p>Your file has been decrypted and verified successfully</p>
+          <div class="success-actions">
+            <button class="btn btn-cyan" id="downloadDecrypted">
+              <span class="material-icons-round">download</span>
+              Download Original File
+            </button>
+          </div>
+          <button class="btn btn-ghost" id="decryptAnother">
+            <span class="material-icons-round">add</span>
+            Decrypt Another File
+          </button>
+        </div>
+
+        <!-- Error -->
+        <div class="error-section" id="decryptError" style="display:none;">
+          <div class="error-icon-wrap">
+            <span class="material-icons-round">error</span>
+          </div>
+          <h3 id="errorTitle">Decryption Failed</h3>
+          <p id="errorMessage">Wrong password or corrupted file.</p>
+          <button class="btn btn-outline" id="retryDecrypt">
+            <span class="material-icons-round">refresh</span>
+            Try Again
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="features-section" id="features">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-icon features-icon">
+          <span class="material-icons-round">security</span>
+        </div>
+        <h2 class="section-title">Security Features</h2>
+        <p class="section-subtitle">Enterprise-grade encryption, available to everyone</p>
+      </div>
+
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon" style="--accent: #E040FB;">
+            <span class="material-icons-round">enhanced_encryption</span>
+          </div>
+          <h3>AES-256-GCM</h3>
+          <p>Military-grade authenticated encryption. The same standard used by governments and financial institutions worldwide.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon" style="--accent: #7C4DFF;">
+            <span class="material-icons-round">key</span>
+          </div>
+          <h3>PBKDF2-SHA256</h3>
+          <p>150,000+ iterations of key derivation. Makes brute-force attacks computationally infeasible even with powerful hardware.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon" style="--accent: #00E5FF;">
+            <span class="material-icons-round">devices</span>
+          </div>
+          <h3>100% Client-Side</h3>
+          <p>Everything happens in your browser. No file is ever uploaded to any server. Zero-knowledge architecture.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon" style="--accent: #FF4081;">
+            <span class="material-icons-round">verified_user</span>
+          </div>
+          <h3>Integrity Verification</h3>
+          <p>GCM authentication tag and SHA-256 hash ensure your files haven't been tampered with during storage or transit.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon" style="--accent: #FFB300;">
+            <span class="material-icons-round">vpn_key</span>
+          </div>
+          <h3>Secure Key Sharing</h3>
+          <p>Generate one-time key shares with expiration. Share keys separately from encrypted files for maximum security.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon" style="--accent: #00BCD4;">
+            <span class="material-icons-round">phone_android</span>
+          </div>
+          <h3>App Compatible</h3>
+          <p>Files encrypted here use the exact same .ufenc format as the UniDoc app. Encrypt on web, decrypt on mobile — and vice versa.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works -->
+  <section class="how-section">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">How It Works</h2>
+        <p class="section-subtitle">Three simple steps to protect your files</p>
+      </div>
+
+      <div class="steps">
+        <div class="step">
+          <div class="step-number">1</div>
+          <div class="step-content">
+            <h3>Select Your File</h3>
+            <p>Choose any file up to 100MB. Documents, images, videos — anything you want to protect.</p>
+          </div>
+        </div>
+        <div class="step-connector"></div>
+        <div class="step">
+          <div class="step-number">2</div>
+          <div class="step-content">
+            <h3>Set a Password</h3>
+            <p>Use a strong password (12+ characters) or let us auto-generate a cryptographically secure one for you.</p>
+          </div>
+        </div>
+        <div class="step-connector"></div>
+        <div class="step">
+          <div class="step-number">3</div>
+          <div class="step-content">
+            <h3>Download Encrypted</h3>
+            <p>Get your .ufenc encrypted file. Decrypt it anytime on this site or in the UniDoc app with your password.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- App Promo Section -->
+  <section class="app-section" id="app">
+    <div class="container">
+      <div class="app-promo">
+        <div class="app-promo-content">
+          <div class="app-badge">
+            <span class="material-icons-round">star</span>
+            Full Power on Mobile
+          </div>
+          <h2 class="app-title">
+            Get the UniDoc App
+          </h2>
+          <p class="app-description">
+            Unlock the full encryption suite on your mobile device. The UniDoc app offers everything you see here — plus a hidden vault, biometric lock, QR code key sharing, and support for 50+ document formats.
+          </p>
+          <div class="app-features-list">
+            <div class="app-feature-item">
+              <span class="material-icons-round">enhanced_encryption</span>
+              <span>AES-256-GCM File Encryption</span>
+            </div>
+            <div class="app-feature-item">
+              <span class="material-icons-round">qr_code_2</span>
+              <span>QR Code Key Sharing</span>
+            </div>
+            <div class="app-feature-item">
+              <span class="material-icons-round">fingerprint</span>
+              <span>Biometric Authentication</span>
+            </div>
+            <div class="app-feature-item">
+              <span class="material-icons-round">visibility_off</span>
+              <span>Hidden Encrypted Vault</span>
+            </div>
+            <div class="app-feature-item">
+              <span class="material-icons-round">description</span>
+              <span>50+ Document Formats</span>
+            </div>
+            <div class="app-feature-item">
+              <span class="material-icons-round">timer</span>
+              <span>Auto-Expiring Keys</span>
+            </div>
+          </div>
+          <div class="app-download-buttons">
+            <a href="#" class="store-btn google-play">
+              <svg class="store-icon" viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.61 3,21.09 3,20.5M16.81,15.12L6.05,21.34L14.54,12.85L16.81,15.12M20.16,10.81C20.5,11.08 20.75,11.5 20.75,12C20.75,12.5 20.5,12.92 20.16,13.19L17.89,14.5L15.39,12L17.89,9.5L20.16,10.81M6.05,2.66L16.81,8.88L14.54,11.15L6.05,2.66Z"/></svg>
+              <div class="store-text">
+                <span class="store-pre">GET IT ON</span>
+                <span class="store-name">Google Play</span>
+              </div>
+            </a>
+            <a href="#" class="store-btn app-store">
+              <svg class="store-icon" viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M18.71,19.5C17.88,20.5 17,21.4 15.66,21.41C14.32,21.42 13.87,20.58 12.34,20.58C10.81,20.58 10.31,21.38 9.05,21.42C7.74,21.45 6.75,20.42 5.91,19.42C4.18,17.38 2.86,13.78 4.64,11.22C5.52,9.94 6.9,9.16 8.39,9.14C9.68,9.12 10.89,10.04 11.68,10.04C12.46,10.04 13.94,8.93 15.49,9.11C16.14,9.14 17.82,9.38 18.91,10.97C18.8,11.04 16.63,12.28 16.66,14.86C16.69,17.94 19.38,18.88 19.41,18.89C19.38,18.96 19.08,19.99 18.71,19.5M13.14,7.44C13.79,6.64 14.24,5.53 14.12,4.42C13.15,4.47 11.98,5.06 11.31,5.86C10.7,6.58 10.16,7.72 10.31,8.8C11.39,8.88 12.49,8.24 13.14,7.44Z"/></svg>
+              <div class="store-text">
+                <span class="store-pre">Download on</span>
+                <span class="store-name">App Store</span>
+              </div>
+            </a>
+          </div>
+        </div>
+        <div class="app-promo-visual">
+          <div class="phone-mockup">
+            <div class="phone-screen">
+              <div class="mock-header">
+                <span class="material-icons-round">shield</span>
+                <span>Encryption Tools</span>
+              </div>
+              <div class="mock-card purple">
+                <span class="material-icons-round">enhanced_encryption</span>
+                <div>
+                  <strong>Encrypt File</strong>
+                  <small>AES-256 with key sharing</small>
+                </div>
+              </div>
+              <div class="mock-card amber">
+                <span class="material-icons-round">key</span>
+                <div>
+                  <strong>Password Protect</strong>
+                  <small>Add password to any file</small>
+                </div>
+              </div>
+              <div class="mock-card cyan">
+                <span class="material-icons-round">lock_open</span>
+                <div>
+                  <strong>Decrypt File</strong>
+                  <small>Password or QR code</small>
+                </div>
+              </div>
+              <div class="mock-vault">
+                <span class="material-icons-round">visibility_off</span>
+                <span>Hidden Vault</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Cross-platform CTA -->
+  <section class="cta-section">
+    <div class="container">
+      <div class="cta-card">
+        <h2>Encrypt on Web. Decrypt on Mobile.</h2>
+        <p>The same .ufenc format works everywhere. Encrypt a file here and open it in the UniDoc app — or encrypt on your phone and decrypt here. Complete cross-platform compatibility.</p>
+        <div class="cta-actions">
+          <a href="#encrypt" class="btn btn-primary btn-lg">
+            <span class="material-icons-round">enhanced_encryption</span>
+            Start Encrypting
+          </a>
+          <a href="#app" class="btn btn-outline btn-lg">
+            <span class="material-icons-round">phone_android</span>
+            Get the App
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <span class="material-icons-round logo-icon">shield</span>
+          <span class="logo-text">UniDoc<span class="logo-accent">Encrypt</span></span>
+          <p class="footer-tagline">Military-grade encryption for everyone.</p>
+        </div>
+        <div class="footer-links-grid">
+          <div class="footer-col">
+            <h4>Tools</h4>
+            <a href="#encrypt">Encrypt File</a>
+            <a href="#decrypt">Decrypt File</a>
+          </div>
+          <div class="footer-col">
+            <h4>Security</h4>
+            <a href="#features">Features</a>
+            <a href="#">Documentation</a>
+          </div>
+          <div class="footer-col">
+            <h4>App</h4>
+            <a href="#app">Download</a>
+            <a href="#">Support</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 UniDoc. All files are processed locally — we never see your data.</p>
+        <div class="footer-badges">
+          <span class="badge">AES-256-GCM</span>
+          <span class="badge">PBKDF2-SHA256</span>
+          <span class="badge">Zero Knowledge</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Toast notification -->
+  <div class="toast" id="toast">
+    <span class="material-icons-round toast-icon">check_circle</span>
+    <span class="toast-message" id="toastMessage">Copied!</span>
+  </div>
+
+  <script src="crypto.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
