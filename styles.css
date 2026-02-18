@@ -25,6 +25,17 @@
   --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+.logo-container {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.app-logo {
+  width: 90px;
+  height: 90px;
+  object-fit: contain;
+}
+
 *, *::before, *::after {
   margin: 0; padding: 0; box-sizing: border-box;
 }
@@ -1345,3 +1356,4 @@ input, select { font-family: inherit; }
   .success-actions { flex-direction: column; }
   .app-download-buttons { flex-direction: column; }
 }
+
