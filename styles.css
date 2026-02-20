@@ -25,6 +25,23 @@
   --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+.seo-content {
+  max-width: 900px;
+  margin: 60px auto;
+  padding: 0 20px;
+  line-height: 1.7;
+  font-size: 16px;
+}
+
+.seo-content h2 {
+  margin-top: 30px;
+  font-size: 24px;
+}
+
+.seo-content ul {
+  margin-top: 15px;
+  padding-left: 20px;
+}
 .logo-container {
   text-align: center;
   margin-top: 20px;
@@ -1356,4 +1373,5 @@ input, select { font-family: inherit; }
   .success-actions { flex-direction: column; }
   .app-download-buttons { flex-direction: column; }
 }
+
 
