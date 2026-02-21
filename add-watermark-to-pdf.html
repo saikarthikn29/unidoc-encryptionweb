@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Add Watermark to PDF Online Without Uploading | Free PDF Watermark Tool | UniDoc</title>
+  <meta name="description" content="Add text or image watermark to your PDF securely in your browser. 100% client-side PDF watermark tool — no uploads, no servers. Free online watermark adder to PDF.">
+  <meta name="keywords" content="add watermark to pdf online, watermark adder to pdf, pdf watermark tool, add text watermark pdf, add image watermark pdf, online pdf watermark, free pdf watermark">
+  <meta name="theme-color" content="#7C4DFF">
+  <meta name="robots" content="index, follow">
+
+  <meta property="og:title" content="Add Watermark to PDF Online | Free PDF Watermark Tool | UniDoc">
+  <meta property="og:description" content="Add text or image watermarks to PDF files directly in your browser. 100% secure — your files never leave your device.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://unidocapp.com/add-watermark-to-pdf.html">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Add Watermark to PDF Online Without Uploading | UniDoc">
+  <meta name="twitter:description" content="Free PDF watermark tool. Add text or image watermarks in your browser. No uploads.">
+
+  <link rel="canonical" href="https://unidocapp.com/add-watermark-to-pdf.html">
+  <link rel="icon" type="image/png" href="logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "UniDoc PDF Watermark Tool",
+    "description": "Add text or image watermark to your PDF online without uploading. 100% secure, client-side processing.",
+    "url": "https://unidocapp.com/add-watermark-to-pdf.html"
+    "applicationCategory": "UtilitiesApplication",
+    "operatingSystem": "Any",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [{
+      "@type": "Question",
+      "name": "Is it safe to add a watermark to my PDF here?",
+      "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Yes. Everything runs in your browser. Your file is never uploaded."
+      }
+    }]
+  }
+  </script>
+</head>
+<body>
+
+  <!-- Background -->
+  <div class="bg-animation">
+    <div class="bg-gradient"></div>
+    <div class="bg-particles" id="particles"></div>
+  </div>
+
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="#" class="nav-logo">
+        <img src="logo.png" alt="UniDoc" class="nav-logo-img">
+        <span class="logo-text">UniDoc<span class="logo-accent">Watermark</span></span>
+      </a>
+      <div class="nav-links">
+        <a href="#tool" class="nav-link active">Watermark</a>
+        <a href="#features" class="nav-link">Features</a>
+        <a href="#how" class="nav-link">How It Works</a>
+        <a href="#faq" class="nav-link">FAQ</a>
+      </div>
+      <a href="#tool" class="nav-cta">
+        <span class="material-icons-round">branding_watermark</span>
+        Try Now
+      </a>
+      <button class="nav-toggle" id="navToggle">
+        <span class="material-icons-round">menu</span>
+      </button>
+    </div>
+  </nav>
+
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#tool" class="mobile-link">Watermark</a>
+    <a href="#features" class="mobile-link">Features</a>
+    <a href="#how" class="mobile-link">How It Works</a>
+    <a href="#faq" class="mobile-link">FAQ</a>
+  </div>
+
+  <!-- Hero -->
+  <section class="hero" id="hero">
+    <div class="container">
+      <div class="hero-badge">
+        <span class="material-icons-round">verified_user</span>
+        100% Browser-Based &amp; Secure
+      </div>
+      <h1 class="hero-title">
+        Add Watermark to PDF<br>
+        <span class="gradient-text">Without Uploading</span>
+      </h1>
+      <p class="hero-subtitle">
+        Protect your PDFs with text or image watermarks — processed entirely in your browser.
+        Your files never leave your device.
+      </p>
+      <a href="#tool" class="btn btn-primary btn-lg">
+        <span class="material-icons-round">branding_watermark</span>
+        Add Watermark Now
+      </a>
+    </div>
+  </section>
+
+  <!-- ========== WATERMARK TOOL — App-like editor ========== -->
+  <section class="tool-section" id="tool">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-icon tool-accent">
+          <span class="material-icons-round">branding_watermark</span>
+        </div>
+        <h2 class="section-title">PDF Watermark</h2>
+        <p class="section-subtitle">Select a PDF, customize your watermark, position it, and save.</p>
+      </div>
+
+      <div class="editor-card" id="editorCard">
+
+        <!-- 1. PDF Selector -->
+        <div class="list-tile" id="pdfSelector">
+          <div class="tile-leading" id="pdfIconWrap">
+            <span class="material-icons-round">picture_as_pdf</span>
+          </div>
+          <div class="tile-body">
+            <span class="tile-title" id="pdfTitle">Select PDF file</span>
+            <span class="tile-sub" id="pdfSub">Tap to choose a PDF</span>
+          </div>
+          <span class="tile-trailing material-icons-round" id="pdfTrailing">arrow_forward_ios</span>
+          <input type="file" id="pdfFileInput" class="hidden-input" accept=".pdf,application/pdf">
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- 2. Mode Selector -->
+        <div class="segmented-btn" id="modeSelector">
+          <button class="seg active" data-mode="text">
+            <span class="material-icons-round">text_fields</span>
+            <span>Text</span>
+          </button>
+          <button class="seg" data-mode="image">
+            <span class="material-icons-round">image</span>
+            <span>Image</span>
+          </button>
+        </div>
+
+        <!-- 3a. Text Config -->
+        <div class="config-panel" id="textPanel">
+
+          <!-- Presets -->
+          <div class="presets-scroll" id="presetsScroll">
+            <button class="chip" data-text="CONFIDENTIAL" data-color="#D32F2F" data-rotation="-30" data-opacity="12" data-repeat="1">
+              <span class="chip-dot" style="background:rgba(211,47,47,0.3)"></span>Confidential
+            </button>
+            <button class="chip" data-text="DRAFT" data-color="#1976D2" data-rotation="-30" data-opacity="15" data-repeat="1">
+              <span class="chip-dot" style="background:rgba(25,118,210,0.3)"></span>Draft
+            </button>
+            <button class="chip" data-text="COPY" data-color="#388E3C" data-rotation="-30" data-opacity="12" data-repeat="0">
+              <span class="chip-dot" style="background:rgba(56,142,60,0.3)"></span>Copy
+            </button>
+            <button class="chip" data-text="SAMPLE" data-color="#FF8F00" data-rotation="-30" data-opacity="15" data-repeat="1">
+              <span class="chip-dot" style="background:rgba(255,143,0,0.3)"></span>Sample
+            </button>
+            <button class="chip" data-text="DO NOT COPY" data-color="#C62828" data-rotation="-30" data-opacity="10" data-repeat="1">
+              <span class="chip-dot" style="background:rgba(198,40,40,0.3)"></span>Do Not Copy
+            </button>
+            <button class="chip" data-text="APPROVED" data-color="#2E7D32" data-rotation="0" data-opacity="18" data-repeat="0">
+              <span class="chip-dot" style="background:rgba(46,125,50,0.3)"></span>Approved
+            </button>
+          </div>
+
+          <!-- Text Input -->
+          <div class="field">
+            <label class="field-label">Watermark text</label>
+            <div class="field-input-wrap">
+              <input type="text" id="wmText" value="CONFIDENTIAL" maxlength="100" placeholder="Enter watermark text">
+              <button class="field-clear" id="clearText"><span class="material-icons-round">close</span></button>
+            </div>
+          </div>
+
+          <!-- Color & Size -->
+          <div class="row-2">
+            <button class="outlined-btn" id="colorBtn">
+              <span class="color-swatch" id="colorSwatch"></span>
+              <span>Color</span>
+            </button>
+            <div class="field compact">
+              <label class="field-label">Size</label>
+              <select id="fontSizeSelect">
+                <option value="32">Small</option>
+                <option value="48">Medium</option>
+                <option value="64" selected>Large</option>
+                <option value="80">X-Large</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3b. Image Config -->
+        <div class="config-panel hidden" id="imagePanel">
+          <div class="list-tile" id="imgSelector">
+            <div class="tile-leading img-leading" id="imgIconWrap">
+              <span class="material-icons-round" id="imgIcon">image</span>
+              <img id="imgThumb" class="hidden" alt="Watermark">
+            </div>
+            <div class="tile-body">
+              <span class="tile-title" id="imgTitle">Select watermark image</span>
+              <span class="tile-sub">PNG or JPG with transparency works best</span>
+            </div>
+            <span class="tile-trailing material-icons-round">arrow_forward_ios</span>
+            <input type="file" id="imgFileInput" class="hidden-input" accept="image/png,image/jpeg">
+          </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- 4. Interactive Editor (matches app) -->
+        <div class="editor-block">
+          <div class="editor-block-header">
+            <span class="editor-block-title">Position &amp; Transform</span>
+            <button class="text-btn" id="resetTransform">
+              <span class="material-icons-round">refresh</span> Reset
+            </button>
+          </div>
+
+          <div class="canvas-area" id="canvasArea">
+            <!-- Simulated PDF page (white with gray text lines) -->
+            <div class="pdf-sim" id="pdfSim">
+              <div class="sl w100"></div>
+              <div class="sl w100"></div>
+              <div class="sl w70"></div>
+              <div class="sl w100"></div>
+              <div class="sl w100"></div>
+              <div class="sl w55"></div>
+              <div class="sl w100"></div>
+              <div class="sl w100"></div>
+              <div class="sl w80"></div>
+              <div class="sl w100"></div>
+              <div class="sl w100"></div>
+              <div class="sl w40"></div>
+            </div>
+            <!-- Draggable watermark with selection border -->
+            <div class="wm-box" id="wmBox">
+              <span class="wm-text" id="wmPreviewText">CONFIDENTIAL</span>
+              <img class="wm-img hidden" id="wmPreviewImg" alt="">
+            </div>
+            <!-- Handle -->
+            <div class="wm-handle" id="wmHandle">
+              <span class="material-icons-round">open_with</span>
+            </div>
+          </div>
+
+          <p class="hint-text" id="hintText">Drag corner handle to resize/rotate</p>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- 5. Controls -->
+        <div class="controls">
+          <!-- Opacity -->
+          <div class="ctrl-label-row">
+            <span class="material-icons-round ctrl-icon">opacity</span>
+            <span id="opacityLabel">Opacity: 24%</span>
+          </div>
+          <input type="range" class="range-slider" id="opacityRange" min="5" max="50" value="24">
+
+          <!-- Tile toggle -->
+          <label class="switch-tile">
+            <div class="switch-tile-left">
+              <span class="material-icons-round ctrl-icon">grid_view</span>
+              <div>
+                <span class="switch-title">Tile watermark</span>
+                <span class="switch-sub">Repeat across all pages</span>
+              </div>
+            </div>
+            <span class="toggle">
+              <input type="checkbox" id="tileToggle">
+              <span class="toggle-track"></span>
+            </span>
+          </label>
+
+          <!-- Spacing -->
+          <div id="spacingBlock" class="hidden">
+            <div class="ctrl-label-row">
+              <span class="material-icons-round ctrl-icon">space_bar</span>
+              <span id="spacingLabel">Spacing: 140px</span>
+            </div>
+            <input type="range" class="range-slider" id="spacingRange" min="60" max="300" value="140" step="10">
+          </div>
+        </div>
+
+        <!-- 6. Save Button -->
+        <button class="save-btn" id="saveBtn" disabled>
+          <span class="save-btn-icon material-icons-round" id="saveBtnIcon">save</span>
+          <span id="saveBtnLabel">Save Watermarked PDF</span>
+        </button>
+
+        <!-- Success result -->
+        <div class="result-panel hidden" id="successPanel">
+          <span class="material-icons-round result-check">check_circle</span>
+          <h3 class="result-title">Watermark Applied!</h3>
+          <p class="result-desc">Processed locally — no data was uploaded.</p>
+          <button class="btn btn-primary" id="downloadBtn">
+            <span class="material-icons-round">download</span> Download PDF
+          </button>
+          <button class="text-btn" id="startOverBtn">
+            <span class="material-icons-round">restart_alt</span> Start Over
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Color Picker Modal -->
+  <div class="modal-bg hidden" id="colorModal">
+    <div class="modal-dialog">
+      <h3 class="modal-title">Watermark Color</h3>
+      <div class="color-grid" id="colorGrid"></div>
+      <div class="modal-footer">
+        <button class="text-btn" id="colorCancelBtn">Cancel</button>
+        <button class="btn btn-primary btn-sm" id="colorSelectBtn">Select</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Features -->
+  <section class="features-section" id="features">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Why Use This PDF Watermark Tool?</h2>
+        <p class="section-subtitle">The most secure way to add watermark to PDF online</p>
+      </div>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon" style="--accent:#7C4DFF"><span class="material-icons-round">security</span></div>
+          <h3>100% Client-Side</h3>
+          <p>Your PDF never leaves your device. Everything is processed locally in your browser.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon" style="--accent:#FF9100"><span class="material-icons-round">text_fields</span></div>
+          <h3>Text Watermark</h3>
+          <p>Use presets or custom text. Configure color, size, opacity, and rotation.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon" style="--accent:#00E5FF"><span class="material-icons-round">image</span></div>
+          <h3>Image Watermark</h3>
+          <p>Stamp your logo or any image. PNG transparency supported.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon" style="--accent:#FF4081"><span class="material-icons-round">open_with</span></div>
+          <h3>Interactive Editor</h3>
+          <p>Drag to move, handle to rotate &amp; scale — like the UniDoc app.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon" style="--accent:#FFB300"><span class="material-icons-round">grid_view</span></div>
+          <h3>Tile Watermark</h3>
+          <p>Repeat across every page with configurable spacing.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon" style="--accent:#00BCD4"><span class="material-icons-round">speed</span></div>
+          <h3>Lightning Fast</h3>
+          <p>Modern browser APIs. Large PDFs in seconds.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works -->
+  <section class="how-section" id="how">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">How to Add Watermark to PDF</h2>
+        <p class="section-subtitle">Same flow as the UniDoc app — right in your browser</p>
+      </div>
+      <div class="steps-list">
+        <div class="step-row"><div class="step-num">1</div><div><h3>Select PDF</h3><p>Choose your PDF file. It stays on your device.</p></div></div>
+        <div class="step-line"></div>
+        <div class="step-row"><div class="step-num">2</div><div><h3>Choose Text or Image</h3><p>Pick a preset, type custom text, or upload your logo.</p></div></div>
+        <div class="step-line"></div>
+        <div class="step-row"><div class="step-num">3</div><div><h3>Position &amp; Customize</h3><p>Drag, rotate, and scale on the interactive preview.</p></div></div>
+        <div class="step-line"></div>
+        <div class="step-row"><div class="step-num">4</div><div><h3>Save &amp; Download</h3><p>Click save and download your watermarked PDF.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SEO -->
+  <section class="seo-section">
+    <div class="container">
+      <div class="seo-card">
+        <h2>The Best Free PDF Watermark Tool Online</h2>
+        <p>Looking for a reliable way to <strong>add watermark to PDF online</strong>? UniDoc's free <strong>PDF watermark tool</strong> lets you protect your documents without compromising privacy. Unlike other services, our <strong>watermark adder to PDF</strong> processes everything in your browser — your files never leave your device.</p>
+        <p>Whether you need to stamp "CONFIDENTIAL" on business documents, add your company logo to reports, or mark drafts before sharing, this tool handles it all with the same interactive editor found in the UniDoc mobile app.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq-section" id="faq">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Frequently Asked Questions</h2>
+      </div>
+      <div class="faq-list">
+        <details class="faq-item"><summary>Is it safe to add a watermark to my PDF here?</summary><p>Yes. Everything runs in your browser using JavaScript. Your PDF is never uploaded to any server.</p></details>
+        <details class="faq-item"><summary>Can I use my logo as a watermark?</summary><p>Yes! Switch to Image mode and upload a PNG or JPG. PNG with transparency works best.</p></details>
+        <details class="faq-item"><summary>Can I drag and position my watermark?</summary><p>Yes. The interactive editor lets you drag to move, and use the corner handle to rotate and scale — exactly like in the UniDoc app.</p></details>
+        <details class="faq-item"><summary>Is there a file size limit?</summary><p>The web tool supports PDFs up to 500 MB.</p></details>
+        <details class="faq-item"><summary>Is this tool free?</summary><p>Yes, completely free with no registration. For more features, try the UniDoc app.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <img src="logo.png" alt="UniDoc" class="footer-logo">
+          <span class="logo-text">UniDoc</span>
+        </div>
+        <div class="footer-links">
+          <a href="#tool">Add Watermark</a>
+          <a href="/index.html">Encrypt File</a>  
+          <a href="#features">Features</a>
+          <a href="#faq">FAQ</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 UniDoc. All files are processed locally.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Toast -->
+  <div class="toast" id="toast">
+    <span class="material-icons-round toast-icon" id="toastIcon">check_circle</span>
+    <span id="toastMsg">Done</span>
+  </div>
+
+  <script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+  <script src="watermark.js"></script>
+</body>
+</html>
